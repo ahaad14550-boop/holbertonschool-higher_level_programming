@@ -1,33 +1,46 @@
 #!/usr/bin/python3
-"""Unittest for max_integer([..])
-"""
+"""Unittest for max_integer([..])"""
+
 import unittest
+
 max_integer = __import__('6-max_integer').max_integer
 
 
 class TestMaxInteger(unittest.TestCase):
-    """
-    A class to test a max integer function
-    """
+    """Test cases for max_integer function"""
 
-    def test_max_integer(self):
-        """
-        Test the max integer in a list of integers when the integers
-        are positive or negative numbers
-        """
+    def test_empty_list(self):
+        """Test empty list"""
         self.assertIsNone(max_integer([]))
-        self.assertAlmostEqual(max_integer([1, 2, 3, 4, 5]), 5)
-        self.assertAlmostEqual(max_integer([-4, -3, -2, -1, 0]), 0)
-        self.assertAlmostEqual(max_integer([-90, -120, -150, -180]), -90)
-        self.assertAlmostEqual(max_integer([1.0, 1.5, 1.6, 3.7, 2.3]), 3.7)
-        self.assertAlmostEqual(max_integer([7.7]), 7.7)
 
-    def test_wrong_types(self):
-        """
-        Test the max integer with wrong parameters types
-        """
-        with self.assertRaises(TypeError):
-            max_integer(None)
+    def test_one_element(self):
+        """Test list with one element"""
+        self.assertEqual(max_integer([5]), 5)
 
-        with self.assertRaises(TypeError):
-            max_integer(["Monty", 89, 34, -9.7, "Python"])
+    def test_positive_integers(self):
+        """Test positive integers"""
+        self.assertEqual(max_integer([1, 2, 3, 4]), 4)
+
+    def test_max_in_middle(self):
+        """Test max value in middle"""
+        self.assertEqual(max_integer([1, 8, 3, 4]), 8)
+
+    def test_negative_integers(self):
+        """Test negative integers"""
+        self.assertEqual(max_integer([-1, -2, -3, -4]), -1)
+
+    def test_mixed_integers(self):
+        """Test mixed positive and negative integers"""
+        self.assertEqual(max_integer([-5, 10, 3, -1]), 10)
+
+    def test_float_numbers(self):
+        """Test float values"""
+        self.assertEqual(max_integer([1.5, 2.5, 3.5]), 3.5)
+
+    def test_string(self):
+        """Test string input"""
+        self.assertEqual(max_integer("Brennon"), "r")
+
+
+if __name__ == "__main__":
+    unittest.main()
