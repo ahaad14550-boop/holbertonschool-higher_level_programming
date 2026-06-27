@@ -1,0 +1,42 @@
+This is the test file for our MyList class.
+We want to make sure it handles positive numbers, negative numbers, and empty lists.
+
+First, let us get our class from the module:
+
+    >>> MyList = __import__('1-my_list').MyList
+
+Test 1: Normal list with positive numbers
+-----------------------------------------
+    >>> my_list = MyList()
+    >>> my_list.append(1)
+    >>> my_list.append(4)
+    >>> my_list.append(2)
+    >>> my_list.append(3)
+    >>> my_list.append(5)
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+    >>> my_list.print_sorted()
+    [1, 2, 3, 4, 5]
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+
+Test 2: List with negative numbers (The checker asked for this!)
+----------------------------------------------------------------
+    >>> my_list2 = MyList()
+    >>> my_list2.append(-1)
+    >>> my_list2.append(-10)
+    >>> my_list2.append(5)
+    >>> my_list2.append(-2)
+    >>> print(my_list2)
+    [-1, -10, 5, -2]
+    >>> my_list2.print_sorted()
+    [-10, -2, -1, 5]
+
+Test 3: Empty list (The checker also asked for this!)
+-----------------------------------------------------
+    >>> my_list3 = MyList()
+    >>> print(my_list3)
+    []
+    >>> my_list3.print_sorted()
+    []
+    
