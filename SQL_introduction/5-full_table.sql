@@ -1,3 +1,2 @@
--- Delete the database hbtn_0c_0 in MySQL server 
--- Does not fail if the database does not exist 
-DROP DATABASE IF EXISTS hbtn_0c_0; 
+-- Script that prints the full description of the table first_table
+SHOW CREATE TABLE first_table; 
