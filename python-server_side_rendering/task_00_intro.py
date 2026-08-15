@@ -1,57 +1,45 @@
-#!/usr/bin/python3
-"""Module for generating invitation files from a template."""
-import os
-
-
 def generate_invitations(template, attendees):
-    """
-    Generate personalized invitation files from a template.
-
-    Args:
-        template (str): The template string with placeholders.
-        attendees (list): A list of dictionaries containing attendee data.
-    """
-    # Check template type
     if not isinstance(template, str):
-        print("Error: Template must be a string.")
+        print(f"Invalid template type: expected string, got {type(template).__name__}.")
         return
 
-    # Check attendees type
     if not isinstance(attendees, list) or not all(
         isinstance(attendee, dict) for attendee in attendees
     ):
-        print("Error: Attendees must be a list of dictionaries.")
+        print("Invalid attendees type: expected a list of dictionaries.")
         return
 
-    # Check empty template
     if not template:
         print("Template is empty, no output files generated.")
         return
 
-    # Check empty attendees list
     if not attendees:
         print("No data provided, no output files generated.")
         return
 
-    # Generate an invitation for each attendee
-    placeholders = ["name", "event_title", "event_date", "event_location"]
-
     for index, attendee in enumerate(attendees, start=1):
-        output = template
+        invitation = template
 
-        # Replace placeholders
-        for placeholder in placeholders:
-            value = attendee.get(placeholder)
-            if value is None:
-                value = "N/A"
-            output = output.replace("{" + placeholder + "}", str(value))
+        name = attendee.get("name")
+        event_title = attendee.get("event_title")
+        event_date = attendee.get("event_date")
+        event_location = attendee.get("event_location")
 
-        # Create output filename
-        filename = f"output_{index}.txt"
+        invitation = invitation.replace(
+            "{name}", str(name) if name is not None else "N/A"
+        )
+        invitation = invitation.replace(
+            "{event_title}",
+            str(event_title) if event_title is not None else "N/A"
+        )
+        invitation = invitation.replace(
+            "{event_date}",
+            str(event_date) if event_date is not None else "N/A"
+        )
+        invitation = invitation.replace(
+            "{event_location}",
+            str(event_location) if event_location is not None else "N/A"
+        )
 
-        # Write the output file
-        try:
-            with open(filename, "w") as file:
-                file.write(output)
-        except OSError as error:
-            print(f"Error writing to {filename}: {error}")
+        with open(f"output_{index}.txt", "w") as file:
+            file.write(invitation)
